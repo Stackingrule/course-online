@@ -44,8 +44,10 @@
       <script src="<%= BASE_URL %>ace/assets/js/jquery-1.11.3.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
-        if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+        if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/" +
+            "jquery.mobile.custom.min.js'>"+"<"+"/script>");
       </script>
+        <script src="<%= BASE_URL %>ace/assets/js/bootstrap.min.js"></script>
 </head>
   <body>
     <noscript>
