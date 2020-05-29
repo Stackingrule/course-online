@@ -40,7 +40,7 @@
                              type="XMLMAPPER" />
 
         <!--        <table tableName="test" domainObjectName="Test"/>-->
-        <!--        <table tableName="chapter" domainObjectName="Chapter"/>-->
+                <table tableName="chapter" domainObjectName="Chapter"/>
         <!--        <table tableName="section" domainObjectName="Section"/>-->
         <!--        <table tableName="course" domainObjectName="Course"/>-->
         <!--        <table tableName="course_content" domainObjectName="CourseContent"/>-->
@@ -55,6 +55,6 @@
         <!--        <table tableName="member" domainObjectName="Member"/>-->
         <!--        <table tableName="sms" domainObjectName="Sms"/>-->
 <!--        <table tableName="member_course" domainObjectName="MemberCourse"/>-->
-        <table tableName="test" domainObjectName="Test"/>
+<!--        <table tableName="test" domainObjectName="Test"/>-->
     </context>
 </generatorConfiguration>
