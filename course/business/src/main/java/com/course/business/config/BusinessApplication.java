@@ -20,8 +20,8 @@ public class BusinessApplication {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(BusinessApplication.class);
         Environment env = app.run(args).getEnvironment();
-        LOG.info("BUsiness 启动成功！！");
-        LOG.info("System地址: \thttp://127.0.0.1:{}", env.getProperty("server.port"));
+        LOG.info("Business 启动成功！！");
+        LOG.info("Business地址: \thttp://127.0.0.1:{}", env.getProperty("server.port"));
     }
 
 }
