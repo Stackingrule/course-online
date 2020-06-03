@@ -1,5 +1,17 @@
 <template>
-	<div>
-		<h2>你好，欢迎进入控制台</h2>
-	</div>
+  <div>
+    <h1>您好，欢迎进入控台</h1>
+  </div>
 </template>
+
+<script>
+  export default {
+    name: "welcome",
+    mounted: function() {
+      // sidebar激活样式方法一
+      // this.$parent.activeSidebar("welcome-sidebar");
+    },
+    methods: {
+    }
+  }
+</script>
