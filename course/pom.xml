@@ -9,6 +9,7 @@
         <module>gateway</module>
         <module>server</module>
         <module>business</module>
+        <module>generator</module>
     </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
