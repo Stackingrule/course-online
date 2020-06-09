@@ -58,7 +58,7 @@ public class DbUtil {
         List<Field> fieldList = new ArrayList<>();
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("select table_comment from information_schema.tables Where table_name = '" + tableName + "'");
+        ResultSet rs = stmt.executeQuery("show full columns from `" + tableName + "`");
         if (rs != null) {
             while(rs.next()) {
                 String columnName = rs.getString("Field");
@@ -77,6 +77,14 @@ public class DbUtil {
                 } else {
                     field.setNameCn(comment);
                 }
+                field.setNullAble("YES".equals(nullAble));
+                if (type.toUpperCase().contains("varchar".toUpperCase())) {
+                    String lengthStr = type.substring(type.indexOf("(") + 1, type.length() - 1);
+                    field.setLength(Integer.valueOf(lengthStr));
+                } else {
+                    field.setLength(0);
+                }
+
                 fieldList.add(field);
             }
         }
