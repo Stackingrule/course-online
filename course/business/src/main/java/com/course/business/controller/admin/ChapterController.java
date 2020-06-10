@@ -1,6 +1,7 @@
 package com.course.business.controller.admin;
 
 import com.course.server.dto.ChapterDto;
+import com.course.server.dto.ChapterPageDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
 import com.course.server.exception.ValidatorException;
@@ -23,14 +24,25 @@ public class ChapterController {
     @Resource
     private ChapterService chapterService;
 
+    /**
+     * <h2>列表查询</h2>
+     * @param chapterPageDto {@link ChapterPageDto}
+     * @return {@link ResponseDto}
+     */
     @PostMapping("/list")
-    public ResponseDto list(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody ChapterPageDto chapterPageDto) {
         ResponseDto responseDto = new ResponseDto();
-        chapterService.list(pageDto);
-        responseDto.setContent(pageDto);
+        ValidatorUtil.require(chapterPageDto.getCourseId(), "课程ID");
+        chapterService.list(chapterPageDto);
+        responseDto.setContent(chapterPageDto);
         return responseDto;
     }
 
+    /**
+     * <h2>保存，id有值时更新，无值时新增</h2>
+     * @param chapterDto {@link ChapterDto}
+     * @return {@link ResponseDto}
+     */
     @PostMapping("/save")
     public ResponseDto save(@RequestBody ChapterDto chapterDto) {
         LOG.info("chapterDto:{}", chapterDto);
@@ -46,6 +58,11 @@ public class ChapterController {
         return responseDto;
     }
 
+    /**
+     * <h2>删除</h2>
+     * @param id {@link String}
+     * @return {@link ResponseDto}
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseDto delete(@PathVariable String id) {
         LOG.info("id:{}", id);
