@@ -24,6 +24,17 @@ public class CategoryService {
     /**
      * 列表查询
      */
+    public List<CategoryDto> all() {
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.setOrderByClause("sort asc");
+        List<Category> categoryList = categoryMapper.selectByExample(categoryExample);
+        List<CategoryDto> categoryDtoList = CopyUtil.copyList(categoryList, CategoryDto.class);
+        return categoryDtoList;
+    }
+
+    /**
+     * 列表查询
+     */
     public void list(PageDto pageDto) {
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         CategoryExample categoryExample = new CategoryExample();
@@ -66,6 +77,21 @@ public class CategoryService {
      * 删除
      */
     public void delete(String id) {
+        deleteChildren(id);
         categoryMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * <h2>删除子分类</h2>
+     * @param id {@link String}
+     */
+    public void deleteChildren(String id) {
+        Category category = categoryMapper.selectByPrimaryKey(id);
+        if ("00000000".equals(category.getParent())) {
+            // 如果是一级分类，需要删除其下的二级分类
+            CategoryExample example = new CategoryExample();
+            example.createCriteria().andParentEqualTo(category.getId());
+            categoryMapper.deleteByExample(example);
+        }
     }
 }
