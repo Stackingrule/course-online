@@ -101,4 +101,17 @@ public class CourseController {
         courseService.saveContent(contentDto);
         return responseDto;
     }
+
+    /**
+     * <h2>更新排序</h2>
+     * @param sortDto {@link SortDto}
+     * @return
+     */
+    @RequestMapping(value = "/sort")
+    public ResponseDto sort(@RequestBody SortDto sortDto) {
+        LOG.info("更新排序");
+        ResponseDto responseDto = new ResponseDto();
+        courseService.sort(sortDto);
+        return responseDto;
+    }
 }
