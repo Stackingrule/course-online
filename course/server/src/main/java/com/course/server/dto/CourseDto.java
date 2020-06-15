@@ -2,6 +2,8 @@ package com.course.server.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class CourseDto {
@@ -72,6 +74,16 @@ public class CourseDto {
      */
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updatedAt;
+
+    private List<CategoryDto> categorys;
+
+    public List<CategoryDto> getCategorys() {
+        return categorys;
+    }
+
+    public void setCategorys(List<CategoryDto> categorys) {
+        this.categorys = categorys;
+    }
 
     /**
      * 讲师|teacher.id
@@ -190,28 +202,25 @@ public class CourseDto {
         this.teacherId = teacherId;
     }
 
-
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", summary=").append(summary);
+        final StringBuffer sb = new StringBuffer("CourseDto{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", summary='").append(summary).append('\'');
         sb.append(", time=").append(time);
         sb.append(", price=").append(price);
-        sb.append(", image=").append(image);
-        sb.append(", level=").append(level);
-        sb.append(", charge=").append(charge);
-        sb.append(", status=").append(status);
+        sb.append(", image='").append(image).append('\'');
+        sb.append(", level='").append(level).append('\'');
+        sb.append(", charge='").append(charge).append('\'');
+        sb.append(", status='").append(status).append('\'');
         sb.append(", enroll=").append(enroll);
         sb.append(", sort=").append(sort);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", teacherId=").append(teacherId);
-        sb.append("]");
+        sb.append(", categorys=").append(categorys);
+        sb.append(", teacherId='").append(teacherId).append('\'');
+        sb.append('}');
         return sb.toString();
     }
 

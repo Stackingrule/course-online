@@ -60,7 +60,7 @@ public class DbUtil {
         List<Field> fieldList = new ArrayList<>();
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("show full columns from " + tableName);
+        ResultSet rs = stmt.executeQuery("show full columns from `" + tableName + "`");
         if (rs != null) {
             while(rs.next()) {
                 String columnName = rs.getString("Field");

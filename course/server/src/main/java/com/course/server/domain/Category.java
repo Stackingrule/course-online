@@ -1,6 +1,7 @@
 package com.course.server.domain;
 
 public class Category {
+
     private String id;
 
     private String parent;

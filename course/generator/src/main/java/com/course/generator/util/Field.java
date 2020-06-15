@@ -1,7 +1,6 @@
 package com.course.generator.util;
 
 public class Field {
-
     private String name; // 字段名：course_id
     private String nameHump; // 字段名小驼峰：courseId
     private String nameBigHump; // 字段名大驼峰：CourseId
