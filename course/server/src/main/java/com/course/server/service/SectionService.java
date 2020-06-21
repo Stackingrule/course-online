@@ -3,7 +3,6 @@ package com.course.server.service;
 import com.course.server.domain.Section;
 import com.course.server.domain.SectionExample;
 import com.course.server.dto.SectionDto;
-import com.course.server.dto.PageDto;
 import com.course.server.dto.SectionPageDto;
 import com.course.server.enums.SectionChargeEnum;
 import com.course.server.mapper.SectionMapper;
