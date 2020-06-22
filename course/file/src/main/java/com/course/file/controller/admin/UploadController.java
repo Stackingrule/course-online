@@ -46,14 +46,13 @@ public class UploadController {
             Integer size,
             Integer shardIndex,
             Integer shardSize,
-            Integer shardTotal
+            Integer shardTotal,
+            String key
             ) throws IOException {
         LOG.info("上传文件开始");
 
         // 保存文件到本地
         FileUseEnum useEnum = FileUseEnum.getByCode(use);
-        String key = UuidUtil.getShortUuid();
-
 
         // 如果文件加不存在则创建
         String dir = useEnum.name().toLowerCase();
