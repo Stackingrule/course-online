@@ -2,15 +2,15 @@ package com.course.file.controller.admin;
 
 import com.course.server.dto.FileDto;
 import com.course.server.dto.ResponseDto;
-import com.course.server.service.FileService;
-import com.course.server.util.UuidUtil;
 import com.course.server.enums.FileUseEnum;
+import com.course.server.service.FileService;
+import com.course.server.util.Base64ToMultipartFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,18 +38,13 @@ public class UploadController {
 
 
     @RequestMapping("/upload")
-    public ResponseDto upload(
-            @RequestParam MultipartFile shard,
-            String use,
-            String name,
-            String suffix,
-            Integer size,
-            Integer shardIndex,
-            Integer shardSize,
-            Integer shardTotal,
-            String key
-            ) throws IOException {
+    public ResponseDto upload(@RequestBody FileDto fileDto) throws IOException {
         LOG.info("上传文件开始");
+        String use = fileDto.getUse();
+        String key = fileDto.getKey();
+        String suffix = fileDto.getSuffix();
+        String shardBase64 = fileDto.getShard();
+        MultipartFile shard = Base64ToMultipartFile.base64ToMultipart(shardBase64);
 
         // 保存文件到本地
         FileUseEnum useEnum = FileUseEnum.getByCode(use);
@@ -68,16 +63,7 @@ public class UploadController {
         LOG.info(dest.getAbsolutePath());
 
         LOG.info("保存文件记录开始");
-        FileDto fileDto = new FileDto();
         fileDto.setPath(path);
-        fileDto.setName(name);
-        fileDto.setSize(size);
-        fileDto.setSuffix(suffix);
-        fileDto.setUse(use);
-        fileDto.setShardIndex(shardIndex);
-        fileDto.setSize(shardSize);
-        fileDto.setShardTotal(shardTotal);
-        fileDto.setKey(key);
         fileService.save(fileDto);
 
         ResponseDto responseDto = new ResponseDto();
