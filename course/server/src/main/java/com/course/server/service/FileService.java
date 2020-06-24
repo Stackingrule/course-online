@@ -92,4 +92,13 @@ public class FileService {
             return fileList.get(0);
         }
     }
+
+    /**
+     * <h2>根据文件标识查询数据库记录</h2>
+     * @param key {@link String}
+     * @return {@link FileDto}
+     */
+    public FileDto findByKey(String key) {
+        return CopyUtil.copy(selectKey(key), FileDto.class);
+    }
 }
